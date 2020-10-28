@@ -1,27 +1,31 @@
 async function initWorkout() {
-  console.log("inside initWorkout");
-  const lastWorkout = await API.getLastWorkout();
-  console.log(lastWorkout);
-  if (lastWorkout) {
-    console.log("There was a workout");
-      exerciseTime = addExerciseLength(lastWorkout.exercises);
-    document
-      .querySelector("a[href='/exercise?']")
-      .setAttribute("href", `/exercise?id=${lastWorkout._id}`);
-
-
-
-    const workoutSummary = {
-      date: formatDate(lastWorkout.day),
-      totalDuration: exerciseTime,
-      numExercises: lastWorkout.exercises.length,
-      ...tallyExercises(lastWorkout.exercises)
-    };
-
-    renderWorkoutSummary(workoutSummary);
-  } else {
-    console.log("There wasn't a workout");
-    renderNoWorkoutText()
+  try {
+    console.log("inside initWorkout");
+    const lastWorkout = await API.getLastWorkout();
+    console.log(lastWorkout);
+    if (lastWorkout) {
+      console.log("There was a workout");
+        exerciseTime = addExerciseLength(lastWorkout.exercises);
+      document
+        .querySelector("a[href='/exercise?']")
+        .setAttribute("href", `/exercise?id=${lastWorkout._id}`);
+  
+  
+  
+      const workoutSummary = {
+        date: formatDate(lastWorkout.day),
+        totalDuration: exerciseTime,
+        numExercises: lastWorkout.exercises.length,
+        ...tallyExercises(lastWorkout.exercises)
+      };
+  
+      renderWorkoutSummary(workoutSummary);
+    } else {
+      console.log("There wasn't a workout");
+      renderNoWorkoutText()
+    }
+  } catch (e) {
+    console.log(e);
   }
 }
 
