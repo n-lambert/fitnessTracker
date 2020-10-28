@@ -7,8 +7,7 @@ console.log("URI CONFIG STRING");
 console.log(process.env.URI);
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = process.env.URI;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.on('connected', () => {
   console.log("Mongoose is connected!");
 })
@@ -91,7 +90,7 @@ app.get("/stats", (req, res) => {
 })
 
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
