@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv").config();
-
+const { URI } = process.env;
 
 
 const MongoClient = require('mongodb').MongoClient;
