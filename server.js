@@ -3,8 +3,6 @@ const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv").config();
 const { URI } = process.env;
-console.log("URI CONFIG STRING");
-console.log(process.env.URI);
 
 const MongoClient = require('mongodb').MongoClient;
 const client = new MongoClient(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -23,10 +21,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static("public"));
-
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitness", { useNewUrlParser: true });
-
-
 
 
 
@@ -95,5 +89,3 @@ mongoose.connect(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: t
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
-  // const collection = client.db("test").collection("devices");
-  // perform actions on the collection object

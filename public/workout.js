@@ -1,10 +1,7 @@
 async function initWorkout() {
   try {
-    console.log("inside initWorkout");
     const lastWorkout = await API.getLastWorkout();
-    console.log(lastWorkout);
     if (lastWorkout) {
-      console.log("There was a workout");
         exerciseTime = addExerciseLength(lastWorkout.exercises);
       document
         .querySelector("a[href='/exercise?']")
@@ -21,7 +18,6 @@ async function initWorkout() {
   
       renderWorkoutSummary(workoutSummary);
     } else {
-      console.log("There wasn't a workout");
       renderNoWorkoutText()
     }
   } catch (e) {
