@@ -71,7 +71,6 @@ app.put("/api/workouts/:id", (req, res) => {
 
 
 app.get("/", (req, res) => {
-  console.log(req);
   res.send(200);
 });
 
