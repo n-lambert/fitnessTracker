@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv").config();
 const { URI } = process.env;
-
+console.log("URI CONFIG STRING");
+console.log(process.env.URI);
 
 const MongoClient = require('mongodb').MongoClient;
 const uri = process.env.URI;
