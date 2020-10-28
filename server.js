@@ -1,6 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+const dotenv = require("dotenv").config();
+
+
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = process.env.URI;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connection.on('connected', () => {
+  console.log("Mongoose is connected!");
+})
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -13,7 +24,11 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitness", { useNewUrlParser: true });
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitness", { useNewUrlParser: true });
+
+
+
+
 
 app.get("/api/workouts", (req, res) => {
   db.Workout.find({})
@@ -74,6 +89,11 @@ app.get("/stats", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/stats.html"));
 })
 
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
+  // const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
